@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Models\Tag;
+
+use App\Console\Commands\PostTagFinder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Http\Controllers\Controller;
 
 class Post extends Model
 {
@@ -19,8 +19,15 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    // public function scopePostTagFinder(Builder $query)
-    // {
-    //     $query->whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);});
-    // }
+    public function scopeTagFinder($query,int $tag)
+    {
+        return $query->whereHas('tags', function ($query) use ($tag) {
+        $query->where('tags.id', $tag);});
+    }
 }
+
+
+// public function scopePostTagFinder(Builder $query)
+// {
+//     $query->whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);});
+// }

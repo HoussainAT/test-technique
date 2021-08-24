@@ -27,6 +27,7 @@ class PostTagFinder extends Command
     /**
      * Create a new command instance.
      *
+     * 
      * @return void
      */
     public function __construct()
@@ -41,16 +42,17 @@ class PostTagFinder extends Command
      */
     public function handle()
     {
-        $tag = $this->ask("Veuillez entrer le tag voulu parmi:  1=HTML, 2=CSS, 3=JavaScript et 4=PHP"); 
+        $tag = $this->ask("Veuillez entrer le tag voulu parmi:  1=HTML, 2=CSS, 3=JavaScript, 4=PHP, 5=Repellat, 6=Voluptatibus, 7=Blanditiis, 8=Sapiente"); 
 
         $this->info("Voici la liste des posts avec le tag choisi");
-        $this->line(Post::whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);})->get()->pluck('title'));
+        $this->line(Post::tagFinder($tag)->pluck('title'));
+        
     }
     
     
 }
 
-
+// $this->line(Post::whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);})->get()->pluck('title'));
 // $this->info(Tag::all('name')->get($tag));
 
 // $this->info(Post::where(
