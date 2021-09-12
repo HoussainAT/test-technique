@@ -42,24 +42,18 @@ class PostTagFinder extends Command
      */
     public function handle()
     {
-        $tag = $this->ask("Veuillez entrer le tag voulu parmi:  1=HTML, 2=CSS, 3=JavaScript, 4=PHP, 5=Repellat, 6=Voluptatibus, 7=Blanditiis, 8=Sapiente"); 
+        $tag = $this->ask("Entrez un chiffre"); 
+        $finder = Post::tagFinder($tag)->pluck("title");
+        $headers = ['Post', 'Tag'];
+        $title = [ 
+            [$finder],
+            ['' ,$tag]
+        ];
 
-        $this->info("Voici la liste des posts avec le tag choisi");
-        $this->line(Post::tagFinder($tag)->pluck('title'));
+        $this->info("Voici un tableau des posts avec le tag choisi : ");
+        $this->table($headers, $title);
         
     }
     
     
 }
-
-// $this->line(Post::whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);})->get()->pluck('title'));
-// $this->info(Tag::all('name')->get($tag));
-
-// $this->info(Post::where(
-//     ['tags' => function ($query) use($tag) { $query->where('name', $tag->name);
-//     }])->get());
-
-// $this->info(Tag::find($tag)->pluck('name', $tag));
-
-// $this->info(Post::whereHas('tags', function($query) use ($tag) { $query->where('id', $tag);})->get());
-// $this->info(Post::PostTagFinder()->get()->pluck('title'));

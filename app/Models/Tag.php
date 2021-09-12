@@ -19,15 +19,3 @@ class Tag extends Model
         return $this->belongsToMany(Post::class);
     }
 }
-
-// public function scopeTagfinder($query, PostTagFinder $tag)
-    // {
-    //     return $query->whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);})->get()->pluck('title');
-    // }
-
-
-//     public function scopeFinder (Builder $query)
-//     {
-//         $query->where 
-//     }
-// }

@@ -25,9 +25,3 @@ class Post extends Model
         $query->where('tags.id', $tag);});
     }
 }
-
-
-// public function scopePostTagFinder(Builder $query)
-// {
-//     $query->whereHas('tags', function($query) use ($tag) { $query->where('tags.id', $tag);});
-// }

@@ -26,6 +26,7 @@ class TagFactory extends Factory
 
         return [
             'name' => $name,
+            'created_at' => now()
         ];
     }
 }
